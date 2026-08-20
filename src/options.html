@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GermanSpeak Settings</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+      max-width: 620px;
+      margin: 40px auto;
+      padding: 0 20px;
+      color: #0f172a;
+      background: #f8fafc;
+      line-height: 1.5;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0f172a; color: #f1f5f9; }
+      .card { background: #1e293b; border-color: #334155; }
+      .voice { background: #0f172a; }
+      select, input[type="range"] { color: #f1f5f9; }
+    }
+    h1 { font-size: 22px; margin-bottom: 4px; }
+    .subtitle { color: #64748b; margin-bottom: 24px; }
+    .card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: #475569;
+      margin-bottom: 10px;
+    }
+    .voice-list { font-size: 13px; }
+    .voice {
+      padding: 9px 12px;
+      background: #f8fafc;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .voice-name { font-weight: 600; }
+    .voice-lang { font-size: 11px; color: #64748b; }
+    .badge {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #e0e7ff;
+      color: #4338ca;
+      font-weight: 600;
+    }
+    .edge { background: #dbeafe; color: #1e40af; }
+    .info {
+      font-size: 12.5px;
+      background: #f1f5f9;
+      padding: 12px 14px;
+      border-radius: 8px;
+      color: #475569;
+    }
+    @media (prefers-color-scheme: dark) {
+      .info { background: #1e293b; color: #94a3b8; }
+      .badge { background: #312e81; color: #a5b4fc; }
+    }
+    button {
+      background: #4f46e5;
+      color: white;
+      border: none;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: inherit;
+    }
+    button.secondary {
+      background: transparent;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .footer-note { font-size: 11.5px; color: #64748b; margin-top: 30px; }
+
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .setting-row:last-child { border-bottom: none; padding-bottom: 0; }
+    @media (prefers-color-scheme: dark) {
+      .setting-row { border-color: #334155; }
+    }
+    .setting-label { font-size: 14px; font-weight: 500; }
+    .setting-hint { font-size: 12px; color: #64748b; margin-top: 2px; }
+
+    select {
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: white;
+      font-family: inherit;
+    }
+    @media (prefers-color-scheme: dark) {
+      select { background: #0f172a; border-color: #475569; }
+    }
+    input[type="range"] { width: 160px; accent-color: #4f46e5; }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider-track {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #cbd5e1;
+      border-radius: 999px;
+      transition: background-color .15s ease;
+    }
+    .slider-track::before {
+      content: "";
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: transform .15s ease;
+    }
+    .switch input:checked + .slider-track { background-color: #4f46e5; }
+    .switch input:checked + .slider-track::before { transform: translateX(18px); }
+
+    .save-note {
+      font-size: 12px;
+      color: #16a34a;
+      margin-left: 10px;
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+    .save-note.visible { opacity: 1; }
+  </style>
+</head>
+<body>
+  <h1>GermanSpeak Settings</h1>
+  <div class="subtitle">High-quality translation &amp; text-to-speech • Chrome + Edge</div>
+
+  <div class="card">
+    <div class="section-title">How it works</div>
+    <div class="info">
+      Select (highlight) any text on a page. A small icon appears near your selection &mdash; click it to open a card
+      with the original text, its translation, and Play buttons for both languages.
+      GermanSpeak automatically detects the language: German text is translated to English, and anything else
+      (e.g. English) is translated to German.
+      <ul style="margin: 8px 0 0 18px; padding: 0;">
+        <li><strong>Microsoft Edge:</strong> Prefers the excellent online "Natural" neural voices (crystal clear cloud voices)</li>
+        <li><strong>Google Chrome:</strong> Prefers Google voices + high quality local voices</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Preferences</div>
+
+    <div class="setting-row">
+      <div>
+        <div class="setting-label">Show icon on text selection</div>
+        <div class="setting-hint">Turn off to only use the right-click menu or the keyboard shortcut (Alt+Shift+T)</div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="auto-show-icon" checked>
+        <span class="slider-track"></span>
+      </label>
+    </div>
+
+    <div class="setting-row">
+      <div>
+        <div class="setting-label">Translation direction</div>
+        <div class="setting-hint">Auto-detect translates German → English and everything else → German</div>
+      </div>
+      <select id="target-lang">
+        <option value="auto">Auto-detect</option>
+        <option value="de">Always → German</option>
+        <option value="en">Always → English</option>
+      </select>
+    </div>
+
+    <div class="setting-row">
+      <div>
+        <div class="setting-label">Speech speed</div>
+        <div class="setting-hint" id="rate-hint">1.00x</div>
+      </div>
+      <input type="range" id="speech-rate" min="0.6" max="1.4" step="0.05" value="1.0">
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Best voices detected on this browser</div>
+    <div id="voice-list" class="voice-list">
+      <div style="color:#64748b;font-size:12px;">Loading voices...</div>
+    </div>
+    <div class="row" style="margin-top:12px;">
+      <button id="refresh-voices">Refresh voice list</button>
+      <button id="test-source" class="secondary">Test voice (original)</button>
+      <button id="test-target" class="secondary">Test voice (translation)</button>
+      <span class="save-note" id="save-note">Saved</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Tips for best experience</div>
+    <ul style="margin:4px 0 0 18px; font-size:13px; color:#475569;">
+      <li>Be online for the highest quality Edge "Online (Natural)" voices.</li>
+      <li>Select text → small icon appears → click it to translate &amp; hear both languages.</li>
+      <li>Use <strong>Alt+Shift+T</strong> to translate the current selection without the icon.</li>
+      <li>Right-click a selection for "Translate selection" or "Speak selection".</li>
+    </ul>
+  </div>
+
+  <div class="footer-note">
+    Translation uses Google Translate (free public endpoint).<br>
+    Speech uses the browser's built-in Web Speech API (no data leaves your device for TTS).
+  </div>
+
+  <script src="shared/voice-utils.js"></script>
+  <script src="shared/translate-utils.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

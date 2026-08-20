@@ -1,0 +1,62 @@
+{
+  "manifest_version": 3,
+  "name": "GermanSpeak - Translate & Speak",
+  "short_name": "GermanSpeak",
+  "version": "2.0.0",
+  "description": "Highlight any text to get an instant translation (German ↔ English, auto-detected) plus the highest quality text-to-speech for both languages. Works great on Edge (online neural voices) and Chrome.",
+  "author": "GermanSpeak",
+  "icons": {
+    "16": "icons/icon16.jpg",
+    "32": "icons/icon32.jpg",
+    "48": "icons/icon48.jpg",
+    "128": "icons/icon128.jpg"
+  },
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "GermanSpeak",
+    "default_icon": {
+      "16": "icons/icon16.jpg",
+      "32": "icons/icon32.jpg",
+      "48": "icons/icon48.jpg"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "src/shared/voice-utils.js",
+        "src/shared/translate-utils.js",
+        "src/content.js"
+      ],
+      "css": ["src/content.css"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "options_page": "src/options.html",
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://translate.googleapis.com/*"
+  ],
+  "commands": {
+    "translate-selection": {
+      "suggested_key": {
+        "default": "Alt+Shift+T"
+      },
+      "description": "Translate & speak the current selection"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/content.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# Machine-local editor / tooling settings
+.claude/
+.vscode/
+
+# OS cruft
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Packaged extension builds
+*.zip
+*.crx
+*.pem
